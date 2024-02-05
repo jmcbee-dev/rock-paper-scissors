@@ -1,3 +1,6 @@
+var playerScore = 0;
+var computerScore = 0;
+
 function getComputerChoice(){
    return ['rock', 'paper', 'scissors'][Math.floor(Math.random() * 3)]
 }
@@ -21,16 +24,46 @@ function playRound(playerChoice, computerChoice){
    return result;
 }
 
-function playGame(){
-   let playerScore = 0;
-   for(let i = 0; i < 5; i++){
-      let playerChoice = prompt("Pick between rock, paper, or scissors.");
-      let result = playRound(playerChoice, getComputerChoice());
-      console.log(result);
-      if(result.includes('win'))
-         playerScore++;
+function updateScore(){
+   const resultDiv = document.getElementsByClassName('scorecard')[0];
+   let announcement = '';
+   let gameOver = false;
+
+   if(playerScore == 5){
+      announcement = 'Game over, you\'ve won! 🥳';
+      gameOver = true;
+   } else 
+   if(computerScore == 5){
+      announcement = 'Game over, you\'ve lost! 😣';
+      gameOver = true;
+   } else {
+      announcement = `Current score: Player ${playerScore} | Computer ${computerScore}`;
    }
-   console.log(`You won ${playerScore} out of 5 games.`);
+
+   resultDiv.innerHTML = announcement;
+   if(gameOver){
+      let buttons = [...document.getElementsByTagName('button')];
+      buttons.forEach( (button) => {
+         button.removeEventListener('click', button.playing, false);
+      })
+   }   
 }
 
-playGame();
+function addButtonFunctions(){
+   const resultDiv = document.getElementsByClassName('results')[0];
+   let buttons = [...document.getElementsByTagName('button')];
+
+   buttons.forEach( (button) => { 
+      button.addEventListener('click', button.playing=function(){
+         let result = playRound(button.innerHTML, getComputerChoice());
+         resultDiv.innerHTML = result;
+         if(result.includes('win'))
+            playerScore++;
+         if(result.includes('lose'))
+            computerScore++;
+         updateScore();    
+      }, false);
+   });
+}
+
+addButtonFunctions();

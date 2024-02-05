@@ -1,0 +1,41 @@
+body {
+   display: flex;
+   background-color: rgb(3, 3, 3);
+   gap: 0px;
+   height: 100vh;
+   width: 100%;
+   padding: 5px 0;
+   color: rgb(83, 128, 224);
+   font-size: 28px;
+}
+
+button {
+   padding: 25px 50px;
+   font-weight: bold;
+   font-size: 32px;
+   border-radius: 8px;
+   border-style: solid;
+   border: 2px solid rgb(83, 128, 224);
+   border-width: 2px;
+   background-color: rgb(11, 12, 14);
+   color: rgb(83, 128, 224);
+}
+
+.play-area {
+   width: 100%;
+   height: 100%;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   gap: 25px;
+}
+
+.button-list {
+   display: flex;
+   gap: 25px;
+}
+
+.results, .scorecard {
+   height: 30px;
+}
