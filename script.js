@@ -32,3 +32,5 @@ function playGame(){
    }
    console.log(`You won ${playerScore} out of 5 games.`);
 }
+
+playGame();
